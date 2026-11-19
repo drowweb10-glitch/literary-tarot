@@ -1,0 +1,131 @@
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#11100f">
+  <title>Литературное Таро</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: #11100f;
+      color: #e8dfce;
+      font-family: Georgia, serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+
+    main {
+      width: 100%;
+      max-width: 480px;
+      text-align: center;
+    }
+
+    h1 {
+      color: #c8a66b;
+      font-size: 34px;
+      font-weight: normal;
+      letter-spacing: 2px;
+    }
+
+    .subtitle {
+      color: #a49a89;
+      font-size: 16px;
+      line-height: 1.6;
+    }
+
+    .ornament {
+      color: #987849;
+      font-size: 28px;
+      margin: 32px 0;
+    }
+
+    #status {
+      color: #c8a66b;
+      font-size: 15px;
+      margin: 24px 0;
+    }
+
+    #card {
+      display: none;
+      border: 1px solid #705a38;
+      padding: 24px;
+      margin-top: 24px;
+      background: #1b1916;
+    }
+
+    #card h2 {
+      color: #d4b477;
+      font-weight: normal;
+    }
+
+    #card p {
+      line-height: 1.6;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Литературное Таро</h1>
+
+    <p class="subtitle">
+      Астрологи объявили литературный прогноз на неделю.
+      <br>
+      Не пытайся обмануть судьбу.
+    </p>
+
+    <div class="ornament">✦ ❖ ✦</div>
+
+    <p id="status">Обращаемся к литературным звёздам...</p>
+
+    <section id="card">
+      <h2 id="name"></h2>
+      <p id="title"></p>
+      <p id="prediction"></p>
+    </section>
+  </main>
+
+  <script>
+    async function loadCard() {
+      const status = document.getElementById("status");
+
+      try {
+        const response = await fetch("/api/cards");
+
+        if (!response.ok) {
+          throw new Error("Ошибка загрузки карт");
+        }
+
+        const cards = await response.json();
+
+        if (!cards.length) {
+          status.textContent = "В колоде пока нет карт.";
+          return;
+        }
+
+        const card = cards[0];
+
+        document.getElementById("name").textContent = card.name;
+        document.getElementById("title").textContent = card.title;
+        document.getElementById("prediction").textContent = card.prediction;
+
+        document.getElementById("card").style.display = "block";
+        status.textContent = "Литературные звёзды на связи!";
+      } catch (error) {
+        status.textContent = "Пока не удалось связаться с колодой. Проверим подключение.";
+        console.error(error);
+      }
+    }
+
+    loadCard();
+  </script>
+</body>
+</html>
