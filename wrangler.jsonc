@@ -1,0 +1,19 @@
+
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "literary-tarot",
+  "main": "src/index.js",
+  "compatibility_date": "2026-11-19",
+  "workers_dev": true,
+  "assets": {
+    "directory": "./public",
+    "binding": "ASSETS"
+  },
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "literary-tarot-db",
+      "database_id": "734ed96c-903a-46ae-9d56-045e904524f0"
+    }
+  ]
+}
