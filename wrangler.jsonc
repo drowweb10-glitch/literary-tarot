@@ -1,4 +1,3 @@
-
 {
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "literary-tarot",
@@ -15,5 +14,9 @@
       "database_name": "literary-tarot-db",
       "database_id": "734ed96c-903a-46ae-9d56-045e904524f0"
     }
-  ]
+  ],
+  "observability": {
+    "enabled": true,
+    "head_sampling_rate": 1
+  }
 }
