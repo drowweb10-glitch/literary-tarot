@@ -1,9 +1,13 @@
+
 {
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "literary-tarot",
   "main": "src/index.js",
   "compatibility_date": "2026-11-19",
   "workers_dev": true,
+  "vars": {
+    "VK_CLIENT_ID": "54910638"
+  },
   "assets": {
     "directory": "./public",
     "binding": "ASSETS"
