@@ -100,15 +100,22 @@ function initVK() {
     return;
   }
 
-  const VKID = window.VKIDSDK;
+const codeVerifier = Array.from(
+  crypto.getRandomValues(new Uint8Array(32)),
+  byte => byte.toString(16).padStart(2, "0")
+).join("");
 
-  VKID.Config.init({
-    app: 54910638,
-    redirectUrl: "https://literary-tarot.drowweb10.workers.dev/auth/callback",
-    responseMode: VKID.ConfigResponseMode.Callback,
-    source: VKID.ConfigSource.LOWCODE,
-    scope: ""
-  });
+const state = crypto.randomUUID();
+
+VKID.Config.init({
+  app: 54910638,
+  redirectUrl: "https://literary-tarot.drowweb10.workers.dev/auth/callback",
+  state,
+  codeVerifier,
+  responseMode: VKID.ConfigResponseMode.Callback,
+  source: VKID.ConfigSource.LOWCODE,
+  scope: ""
+});
 
   const oneTap = new VKID.OneTap();
 
@@ -118,7 +125,11 @@ function initVK() {
   })
   .on(VKID.WidgetEvents.ERROR, vkError)
   .on(VKID.OneTapInternalEvents.LOGIN_SUCCESS, payload => {
-    VKID.Auth.exchangeCode(payload.code, payload.device_id)
+    VKID.Auth.exchangeCode(
+  payload.code,
+  payload.device_id,
+  codeVerifier
+)
       .then(vkSuccess)
       .catch(vkError);
   });
