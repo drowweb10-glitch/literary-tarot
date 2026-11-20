@@ -6,195 +6,55 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#11100f">
   <title>Литературное Таро</title>
-
   <style>
     * { box-sizing: border-box; }
 
     body {
       margin: 0;
       min-height: 100vh;
-      background:
-        radial-gradient(ellipse at 50% 20%, #30251d 0%, #171411 48%, #0d0c0b 100%);
+      background: radial-gradient(ellipse at 50% 20%, #30251d, #171411 48%, #0d0c0b);
       color: #e8dfce;
       font-family: Georgia, serif;
       padding: 35px 18px;
     }
 
-    main {
-      width: 100%;
-      max-width: 760px;
-      margin: 0 auto;
-      text-align: center;
-    }
-
-    h1 {
-      color: #d0ae70;
-      font-size: clamp(30px, 7vw, 44px);
-      font-weight: normal;
-      letter-spacing: 3px;
-      margin: 20px 0 12px;
-    }
-
-    .subtitle {
-      color: #b3a38c;
-      font-size: 16px;
-      line-height: 1.7;
-    }
-
-    .ornament {
-      color: #a0804e;
-      font-size: 27px;
-      margin: 30px 0;
-    }
-
-    #status {
-      color: #d0ae70;
-      margin: 25px 0;
-      min-height: 24px;
-    }
-
-    .deck {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 14px;
-      max-width: 570px;
-      margin: 35px auto;
-    }
-
+    main { width: 100%; max-width: 760px; margin: auto; text-align: center; }
+    h1 { color: #d0ae70; font-size: clamp(30px, 7vw, 44px); font-weight: normal; letter-spacing: 3px; }
+    .subtitle { color: #b3a38c; line-height: 1.7; }
+    .ornament { color: #a0804e; font-size: 27px; margin: 30px 0; }
+    #status { color: #d0ae70; margin: 25px 0; min-height: 24px; }
+    #login { margin: 25px auto; min-height: 44px; }
+    .deck { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 14px; max-width: 570px; margin: 35px auto; }
     .card-back {
-      aspect-ratio: 2 / 3;
+      aspect-ratio: 2/3;
       border: 1px solid #a0804e;
       border-radius: 5px;
-      background:
-        repeating-linear-gradient(
-          45deg,
-          transparent,
-          transparent 8px,
-          rgba(190,150,90,.06) 9px,
-          transparent 10px
-        ),
-        radial-gradient(ellipse, #423024, #17120f 75%);
-      color: #c6a66d;
-      cursor: pointer;
-      font-family: Georgia, serif;
-      transition: transform .25s, border-color .25s;
-      padding: 8px;
-    }
-
-    .card-back:hover {
-      transform: translateY(-8px);
-      border-color: #e0bf80;
-    }
-
-    .card-symbol {
-      display: block;
-      font-size: clamp(30px, 7vw, 48px);
-      margin-bottom: 12px;
-    }
-
-    .card-label {
-      font-size: 11px;
-      letter-spacing: 2px;
-    }
-
-    .card-back:disabled {
-      cursor: default;
-      opacity: .5;
-    }
-
-    #result {
-      display: none;
-      margin: 35px auto;
-      max-width: 540px;
-      padding: 22px;
-      border: 1px solid #8d7047;
-      background: rgba(27, 24, 20, .92);
-      animation: appear .6s ease;
-    }
-
-    #result img {
-      display: block;
-      width: 100%;
-      max-height: 490px;
-      object-fit: contain;
-      margin: 0 auto 24px;
-      background: #100e0c;
-    }
-
-    #result h2 {
-      color: #d8b878;
-      font-size: 27px;
-      font-weight: normal;
-      margin: 12px 0;
-    }
-
-    #result .title {
-      color: #b99a67;
-      font-style: italic;
-      margin-bottom: 24px;
-    }
-
-    #result .prediction {
-      color: #e8dfce;
-      font-size: 17px;
-      line-height: 1.8;
-      text-align: left;
-    }
-
-    .copy-button {
-      margin-top: 25px;
-      padding: 13px 25px;
-      background: #8d7047;
-      color: #fff4df;
-      border: none;
-      font-family: Georgia, serif;
-      font-size: 15px;
+      background: #211811 url("/images/рубашка.jpg") center/cover no-repeat;
       cursor: pointer;
     }
-
-    .copy-button:hover {
-      background: #aa8959;
-    }
-
-    @keyframes appear {
-      from { opacity: 0; transform: translateY(15px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    @media (max-width: 420px) {
-      .deck { gap: 8px; }
-      #result { padding: 14px; }
-    }
+    .card-back:hover { transform: translateY(-8px); }
+    .card-back:disabled { opacity: .5; cursor: default; }
+    #result { display: none; margin: 35px auto; max-width: 540px; padding: 22px; border: 1px solid #8d7047; background: rgba(27,24,20,.92); }
+    #result img { display: block; width: 100%; max-height: 490px; object-fit: contain; margin: 0 auto 24px; }
+    #result h2 { color: #d8b878; font-weight: normal; }
+    #result .title { color: #b99a67; font-style: italic; }
+    #result .prediction { font-size: 17px; line-height: 1.8; text-align: left; }
+    .copy-button { margin-top: 25px; padding: 13px 25px; background: #8d7047; color: white; border: 0; cursor: pointer; font-family: Georgia,serif; }
   </style>
 </head>
-
 <body>
 <main>
   <h1>Литературное Таро</h1>
-
-  <p class="subtitle">
-    Астрологи объявили литературный прогноз на неделю.<br>
-  </p>
-
+  <p class="subtitle">Астрологи объявили литературный прогноз на неделю.</p>
   <div class="ornament">✦ ❖ ✦</div>
+  <p id="status">Проверяем связь с литературными звёздами...</p>
 
-  <p id="status">Литературные звёзды на связи!</p>
+  <div id="login"></div>
 
-  <section class="deck" id="deck">
-    <button class="card-back" type="button" aria-label="Выбрать первую карту">
-      <span class="card-symbol">✦</span>
-      <span class="card-label">ТАРО</span>
-    </button>
-
-    <button class="card-back" type="button" aria-label="Выбрать вторую карту">
-      <span class="card-symbol">❖</span>
-      <span class="card-label">ТАРО</span>
-    </button>
-
-    <button class="card-back" type="button" aria-label="Выбрать третью карту">
-      <span class="card-symbol">✦</span>
-      <span class="card-label">ТАРО</span>
-    </button>
+  <section class="deck" id="deck" hidden>
+    <button class="card-back" aria-label="Первая карта"></button>
+    <button class="card-back" aria-label="Вторая карта"></button>
+    <button class="card-back" aria-label="Третья карта"></button>
   </section>
 
   <section id="result">
@@ -202,94 +62,112 @@
     <h2 id="name"></h2>
     <p class="title" id="title"></p>
     <p class="prediction" id="prediction"></p>
-    <button class="copy-button" id="copy-button" type="button">
-      Скопировать предсказание
-    </button>
+    <button class="copy-button" id="copy-button">Скопировать предсказание</button>
   </section>
 </main>
 
+<script src="https://unpkg.com/@vkid/sdk@<3.0.0/dist-sdk/umd/index.js"></script>
 <script>
-  let selectedCard = null;
+const status = document.getElementById("status");
+const login = document.getElementById("login");
+const deck = document.getElementById("deck");
+const buttons = document.querySelectorAll(".card-back");
 
-  async function loadCards() {
-    const status = document.getElementById("status");
-    const buttons = document.querySelectorAll(".card-back");
+let selectedCard = null;
+let cards = [];
 
-    try {
-      const response = await fetch("/api/cards");
+function vkError(error) {
+  console.error("VK ID:", error);
+  status.textContent = "Не удалось выполнить вход через ВКонтакте.";
+}
 
-      if (!response.ok) {
-        throw new Error("Ошибка загрузки колоды");
-      }
+function vkSuccess(data) {
+  console.log("VK ID token response:", data);
+  status.textContent = "Вход выполнен. Проверяем доступ...";
+  login.hidden = true;
+  checkAccess(data);
+}
 
-      const cards = await response.json();
+async function checkAccess(data) {
+  // Серверную проверку личности добавим следующим этапом.
+  status.textContent = "Авторизация получена. Серверная проверка ещё не подключена.";
+  console.log("Полученные данные VK ID:", data);
+}
 
-      if (!Array.isArray(cards) || cards.length === 0) {
-        throw new Error("В колоде нет активных карт");
-      }
-
-      status.textContent = "Выбери одну карту. Судьба уже ждёт.";
-
-      buttons.forEach(button => {
-        button.addEventListener("click", () => {
-          if (selectedCard) return;
-
-          selectedCard = cards[
-            Math.floor(Math.random() * cards.length)
-          ];
-
-          buttons.forEach(item => item.disabled = true);
-          showCard(selectedCard);
-        });
-      });
-
-    } catch (error) {
-      console.error(error);
-      status.textContent = "Литературные звёзды временно недоступны. Попробуй обновить страницу.";
-      buttons.forEach(button => button.disabled = true);
-    }
+function initVK() {
+  if (!window.VKIDSDK) {
+    status.textContent = "Не удалось загрузить VK ID.";
+    return;
   }
 
-  function showCard(card) {
-    document.getElementById("status").textContent =
-      "Литературные звёзды сделали свой выбор!";
+  const VKID = window.VKIDSDK;
 
-    document.getElementById("deck").style.display = "none";
-
-    document.getElementById("name").textContent = card.name;
-    document.getElementById("title").textContent = "«" + card.title + "»";
-    document.getElementById("prediction").textContent = card.prediction;
-
-    const image = document.getElementById("card-image");
-    image.src = "/images/" + encodeURIComponent(card.image);
-    image.alt = card.name;
-
-    image.onerror = () => {
-      image.style.display = "none";
-      console.error("Не удалось загрузить изображение:", card.image);
-    };
-
-    document.getElementById("result").style.display = "block";
-  }
-
-  document.getElementById("copy-button").addEventListener("click", async () => {
-    if (!selectedCard) return;
-
-    const text =
-      "Литературное Таро\n" +
-      selectedCard.name + " — «" + selectedCard.title + "»\n\n" +
-      selectedCard.prediction;
-
-    try {
-      await navigator.clipboard.writeText(text);
-      document.getElementById("copy-button").textContent = "Скопировано!";
-    } catch (error) {
-      document.getElementById("copy-button").textContent =
-        "Не удалось скопировать";
-    }
+  VKID.Config.init({
+    app: 54910638,
+    redirectUrl: "https://literary-tarot.drowweb10.workers.dev/auth/callback",
+    responseMode: VKID.ConfigResponseMode.Callback,
+    source: VKID.ConfigSource.LOWCODE,
+    scope: ""
   });
 
-  loadCards();
+  const oneTap = new VKID.OneTap();
+
+  oneTap.render({
+    container: login,
+    showAlternativeLogin: true
+  })
+  .on(VKID.WidgetEvents.ERROR, vkError)
+  .on(VKID.OneTapInternalEvents.LOGIN_SUCCESS, payload => {
+    VKID.Auth.exchangeCode(payload.code, payload.device_id)
+      .then(vkSuccess)
+      .catch(vkError);
+  });
+}
+
+async function loadCards() {
+  try {
+    const response = await fetch("/api/cards");
+    if (!response.ok) throw new Error("Cards API error");
+    cards = await response.json();
+  } catch (error) {
+    console.error(error);
+    status.textContent = "Не удалось загрузить колоду.";
+  }
+}
+
+function showCard(card) {
+  selectedCard = card;
+  deck.hidden = true;
+  status.textContent = "Литературные звёзды сделали свой выбор!";
+  document.getElementById("name").textContent = card.name;
+  document.getElementById("title").textContent = "«" + card.title + "»";
+  document.getElementById("prediction").textContent = card.prediction;
+
+  const image = document.getElementById("card-image");
+  image.src = "/images/" + encodeURIComponent(card.image);
+  image.alt = card.name;
+  document.getElementById("result").style.display = "block";
+}
+
+buttons.forEach(button => {
+  button.addEventListener("click", () => {
+    if (selectedCard || !cards.length) return;
+    buttons.forEach(item => item.disabled = true);
+    const card = cards[Math.floor(Math.random() * cards.length)];
+    showCard(card);
+  });
+});
+
+document.getElementById("copy-button").addEventListener("click", async () => {
+  if (!selectedCard) return;
+  const text = "Литературное Таро\n" + selectedCard.name +
+    " — «" + selectedCard.title + "»\n\n" + selectedCard.prediction;
+  await navigator.clipboard.writeText(text);
+  document.getElementById("copy-button").textContent = "Скопировано!";
+});
+
+loadCards();
+initVK();
 </script>
 </body>
 </html>
